@@ -11,16 +11,39 @@
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
 </head>
-<body>
 
+<body>
 <div id='map'></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3VsZWJlcnJhIiwiYSI6ImNqN2tyNWE5ejJkNTQzM250bjlhNDU1cGUifQ.gG1gUGCN16JvZnKFvxZTUg';
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/suleberra/cjex5amaz03382ro4webnul0h', // stylesheet location
-    center: [-74.50, 40], // starting position [lng, lat]
+    center: [4.625303494062859,52.43370081519061], // starting position [lng, lat]
     zoom: 9 // starting zoom
+});
+
+map.on('load', function () 
+{
+    // Add a symbol layer.
+    map.addLayer(
+    {
+        "id": "symbols",
+        "type": "symbol",
+        "source": 
+        {
+            "type": "geojson",
+            "data": map.addSource('some id', 
+            {
+                type: 'geojson',
+                data: 'https://mydomain.mydata.geojson'
+            })
+        },
+        "layout": 
+        {
+            "icon-image": "rocket-15"
+        }
+    });
 });
 </script>
 
