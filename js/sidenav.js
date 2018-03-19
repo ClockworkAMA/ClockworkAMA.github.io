@@ -1,6 +1,8 @@
 /* Open the sidenav */
-function openNav() {
+function openNav(name) 
+{
     document.getElementById("sidenav").style.width = "100%";
+    document.getElementById("sidenav").lastChild.nodeValue = name;
 }
 
 /* Close/hide the sidenav */

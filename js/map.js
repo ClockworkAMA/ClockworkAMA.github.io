@@ -27,7 +27,7 @@ map.on('load', function ()
     // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
     map.on('click', 'hotels', function (e) {
         map.flyTo({center: e.features[0].geometry.coordinates});
-        openNav();
+        openNav(e.features[0].properties.name);
     });
 
     // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
