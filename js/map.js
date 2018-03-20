@@ -16,7 +16,7 @@ map.on('load', function ()
         "source": 
         {
             "type": "geojson",
-            "data": 'https://rawgit.com/suleberra/mapbox/master/hotel_deneme.json'
+            "data": 'https://rawgit.com/suleberra/mapbox/master/data/hotel_deneme.json'
         },
         "layout": 
         {
