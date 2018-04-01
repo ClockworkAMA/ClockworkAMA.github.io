@@ -1,11 +1,22 @@
-/* Open the sidenav */
+var sidenav = $("#sidenav");
+
 function openNav(name) 
 {
-    document.getElementById("sidenav").style.width = "100%";
-    document.getElementById("sidenav").lastChild.nodeValue = name;
+    setHeader(name);
+    setWidth("100%");
 }
 
-/* Close/hide the sidenav */
-function closeNav() {
-    document.getElementById("sidenav").style.width = "0";
+function closeNav() 
+{
+    setWidth(0);
+}
+
+function setWidth(value)
+{
+    sidenav.width(value);
+}
+
+function setHeader(name)
+{
+    sidenav.find('h1').text(name);
 }

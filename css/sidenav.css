@@ -12,6 +12,19 @@
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
+.sidenav div
+{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.sidenav div h1
+{
+    color: whitesmoke;
+}
+
 /* The navigation menu links */
 .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -31,8 +44,8 @@
 .sidenav .closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
-    font-size: 36px;
+    right: 15px;
+    font-size: 40px;
     margin-left: 50px;
 }
 
