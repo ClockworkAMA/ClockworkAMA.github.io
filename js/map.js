@@ -14,14 +14,10 @@ map.on('load', function () {
             "minzoom": 10,
             "source":
                 {
-                    "type": "geojson",
-                    "data": 'https://rawgit.com/suleberra/mapbox/master/data/hotel_deneme.json'
-                },
-            "layout":
-                {
-                    "icon-image": "rocket-15"
+                    "type": "vector",
+                    "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
                 }
-        });
+        },
 
     map.addLayer(
         {
