@@ -6,8 +6,8 @@ var map = new mapboxgl.Map({
     zoom: 10 // starting zoom
 });
 
-map.on('load', function() {
-    map.loadImage('https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/img/island.png', function(error, image) {
+map.on('load', function () {
+    map.loadImage('https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/img/island.png', function (error, image) {
         if (error) throw error;
         map.addImage('island', image);
         map.addLayer({
@@ -31,20 +31,37 @@ map.on('load', function() {
             }
         });
     });
-});
 
-// Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
-map.on('click', 'hotels', function (e) {
-    map.flyTo({ center: e.features[0].geometry.coordinates });
-    openNav(e.features[0].properties.name);
-});
+    map.addLayer(
+        {
+            "id": "hotels",
+            "type": "symbol",
+            "minzoom": 10,
+            "source":
+                {
+                    "type": "geojson",
+                    "data": 'https://rawgit.com/suleberra/mapbox/master/data/hotel_deneme.json'
+                },
+            "layout":
+                {
+                    "icon-image": "rocket-15"
+                }
+        });
 
-// Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
-map.on('mouseenter', 'hotels', function () {
-    map.getCanvas().style.cursor = 'pointer';
-});
+    // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
+    map.on('click', 'hotels', function (e) {
+        map.flyTo({ center: e.features[0].geometry.coordinates });
+        openNav(e.features[0].properties.name);
+    });
 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'hotels', function () {
-    map.getCanvas().style.cursor = '';
+    // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
+    map.on('mouseenter', 'hotels', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'hotels', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
 });
