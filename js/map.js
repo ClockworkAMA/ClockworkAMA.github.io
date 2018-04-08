@@ -9,17 +9,25 @@ var map = new mapboxgl.Map({
 map.on('load', function() {
     map.loadImage('https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/img/island.png', function(error, image) {
         if (error) throw error;
-        map.addImage('cat', image);
+        map.addImage('island', image);
         map.addLayer({
             "id": "points",
             "type": "symbol",
             "source": {
                 "type": "geojson",
-                "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [4.959110421064651, 52.375762471163256]
+                        }
+                    }]
+                }
             },
             "layout": {
-                "icon-image": "cat",
-                "icon-size": 0.5
+                "icon-image": "island"
             }
         });
     });
