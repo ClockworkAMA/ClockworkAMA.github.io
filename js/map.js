@@ -11,8 +11,9 @@ map.on('load', function () {
         if (error) throw error;
         map.addImage('island', image);
         map.addLayer({
-            "id": "points",
+            "id": "island",
             "type": "symbol",
+            "maxzoom": 11,
             "source": {
                 "type": "geojson",
                 "data": {
@@ -36,7 +37,7 @@ map.on('load', function () {
         {
             "id": "hotels",
             "type": "symbol",
-            "minzoom": 10,
+            "minzoom": 15,
             "source":
                 {
                     "type": "geojson",
@@ -48,6 +49,23 @@ map.on('load', function () {
                 }
         });
 
+
+    // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
+    map.on('click', 'island', function (e) {
+        map.jumpTo({ center: e.features[0].geometry.coordinates });
+        map.zoomTo(14);
+    });
+
+    // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
+    map.on('mouseenter', 'island', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'island', function () {
+        map.getCanvas().style.cursor = '';
+    });
+    
     // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
     map.on('click', 'hotels', function (e) {
         map.flyTo({ center: e.features[0].geometry.coordinates });
