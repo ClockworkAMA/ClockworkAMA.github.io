@@ -7,47 +7,63 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function () {
-    map.addLayer(
-        {
-            "id": "interventions",
-            "type": "circle",
-            "minzoom": 10,
+    map.loadImage('https://github.com/ClockworkAMA/ClockworkAMA.github.io/blob/master/img/island.png', function (error, image) {
+        if (error) throw error;
+        map.addImage('island', image);
+        map.addLayer({
+            "id": "points",
+            "type": "symbol",
+            "maxzoom": 10,
             "source":
                 {
-                    "type": "vector",
+                    "type": 'geojson',
                     "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
                 }
         },
-
-    map.addLayer(
-        {
-            "id": "hotels",
-            "type": "symbol",
-            "minzoom": 10,
-            "source":
-                {
-                    "type": "geojson",
-                    "data": 'https://rawgit.com/suleberra/mapbox/master/data/hotel_deneme.json'
-                },
-            "layout":
-                {
-                    "icon-image": "rocket-15"
-                }
+            "layout": {
+                "icon-image": "island"
+            }
         });
+});
+});
+/*
+map.on('load', function () 
+{
+    map.loadImage('https://github.com/ClockworkAMA/ClockworkAMA.github.io/blob/master/img/island.png',
+        function (error, image) {
+            if (error) throw error;
+            map.addImage('island', image);
+            map.addLayer
+                ({
+                    "id": "interventions",
+                    "type": "circle",
+                    "maxzoom": 10,
+                    "source":
+                        {
+                            "type": 'geojson',
+                            "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
+                        }
+                },
+                "layout":
+                {
+                    "icon-image": "island"
+                });
+        });
+});
+*/
 
-    // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
-    map.on('click', 'hotels', function (e) {
-        map.flyTo({ center: e.features[0].geometry.coordinates });
-        openNav(e.features[0].properties.name);
-    });
+// Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
+map.on('click', 'hotels', function (e) {
+    map.flyTo({ center: e.features[0].geometry.coordinates });
+    openNav(e.features[0].properties.name);
+});
 
-    // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
-    map.on('mouseenter', 'hotels', function () {
-        map.getCanvas().style.cursor = 'pointer';
-    });
+// Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
+map.on('mouseenter', 'hotels', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
 
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'hotels', function () {
-        map.getCanvas().style.cursor = '';
-    });
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'hotels', function () {
+    map.getCanvas().style.cursor = '';
 });
