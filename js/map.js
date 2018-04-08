@@ -6,51 +6,24 @@ var map = new mapboxgl.Map({
     zoom: 10 // starting zoom
 });
 
-map.on('load', function () {
-    map.loadImage('https://github.com/ClockworkAMA/ClockworkAMA.github.io/blob/master/img/island.png', function (error, image) {
+map.on('load', function() {
+    map.loadImage('https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/img/island.png', function(error, image) {
         if (error) throw error;
-        map.addImage('island', image);
+        map.addImage('cat', image);
         map.addLayer({
             "id": "points",
             "type": "symbol",
-            "maxzoom": 10,
-            "source":
-                {
-                    "type": 'geojson',
-                    "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
-                }
-        },
+            "source": {
+                "type": "geojson",
+                "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
+            },
             "layout": {
-                "icon-image": "island"
+                "icon-image": "cat",
+                "icon-size": 0.5
             }
         });
+    });
 });
-});
-/*
-map.on('load', function () 
-{
-    map.loadImage('https://github.com/ClockworkAMA/ClockworkAMA.github.io/blob/master/img/island.png',
-        function (error, image) {
-            if (error) throw error;
-            map.addImage('island', image);
-            map.addLayer
-                ({
-                    "id": "interventions",
-                    "type": "circle",
-                    "maxzoom": 10,
-                    "source":
-                        {
-                            "type": 'geojson',
-                            "data": 'https://rawgit.com/ClockworkAMA/ClockworkAMA.github.io/master/data/interventions.json'
-                        }
-                },
-                "layout":
-                {
-                    "icon-image": "island"
-                });
-        });
-});
-*/
 
 // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
 map.on('click', 'hotels', function (e) {
